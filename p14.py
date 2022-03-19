@@ -6,7 +6,7 @@ class Solution:
         if not strs:
             return ""
         for index,item in enumerate(strs[0]):
-            for i in range(n):
-                if index==len(strs[i]) or item != strs[i][index]:
+            for i in range(1,n):
+                if item != strs[i][index]:
                     return strs[0][:index]
         return strs[0]
