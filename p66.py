@@ -1,18 +1,13 @@
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        if (1 not in digits) and (2 not in digits) and (3 not in digits) and (4 not in digits) and (5 not in digits) 
-        and (6 not in digits) and (7 not in digits) and (8 not in digits) and (0 not in digits):
-            return [1]+[0]*(len(digits))
-        else:
-            if digits[-1]!=9:
-                digits[-1]+=1
-                return digits
-            elif digits[-1]==9:
-                for i in range(len(digits)-1,-1,-1):
-                    if digits[i]!=9:
-                        digits[i]+=1
-                        for j in range(i+1,len(digits)):
-                            if digits[j]==9:
-                                digits[j]=0
-                                continue
-                        return digits
+        if not digits:#如果列表为空
+            return [1]#返回1
+        digits[-1]+=1# 最末位加一
+        for current_index in range(len(digits)-1,0,-1):# 从最末位开始循环到第二高位
+            if digits[current_index]>=10:#如果当前位需要进位
+                digits[current_index-1]+=digits[current_index]//10
+                digits[current_index]%=10#进位到上一位
+        if digits[0]>=10:#如果最高位需要进位
+            digits.insert(0,digits[0]//10)#进位到最高位
+            digits[1]%=10
+        return digits
